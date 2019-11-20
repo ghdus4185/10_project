@@ -1,4 +1,4 @@
-# 07_project - 데이터베이스 설계
+# 10_project - 데이터베이스 설계
 
 ### 01. accounts
 
