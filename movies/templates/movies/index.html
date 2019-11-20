@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div class="row m-5">
+    {% for movie in movies %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card">
+        <a href="{% url 'movies:detail' movie.id%}"><img src="{{movie.poster_url}}" class="card-img-top" alt="..."></a>
+        <div class="card-body">
+          <a href="">{{movie.title}}</a>
+          {% if user in movie.like_users.all %}
+            <a href="{% url 'movies:like' movie.id %}">😍</a>
+          {% else %}
+            <a href="{% url 'movies:like' movie.id %}">😫</a>
+          {% endif %}
+          <span class="badge badge-warning">{{movie.score}}</span></h3>
+        </div>
+      </div>
+      </div>
+      {% endfor %}
+    </div>
+{% endblock %}

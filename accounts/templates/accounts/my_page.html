@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div>follower는 {{user_info.followers.all | length}}명 입니다.</div>
+  <div>following는 {{user_info.followings.all | length}}명 입니다.</div>
+  {% for u in user_list %}
+    {% if u != user_info %}
+    <div>
+      {% if user_info in u.followers.all %}
+        <a href="{% url 'accounts:follow' u.id %}">{{u}}😍</a>
+      {% else %}
+        <a href="{% url 'accounts:follow' u.id %}">{{u}}ㅠㅠ</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  {% endfor %}
+  <h1>{{user_info.username}}님의 페이지 입니다.</h1>
+  <hr>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">영화 제목</th>>
+      </tr>
+    </thead>
+    <tbody>
+      {% for movie in user.like_movies.all %}
+        <tr>
+          <th scope="row">-</th>
+          <td>{{movie.title}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <hr>
+  <h5>내가 남긴 평점 리스트</h5>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">영화 제목</th>
+        <th scope="col">작성한 댓글</th>
+        <th scope="col">평점</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for review in user.review_set.all %}
+        <tr>
+          <th scope="row">-</th>
+          <td>{{review.movies.title}}</td>
+          <td>{{review.content}}</td>
+          <td>{{review.score}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
